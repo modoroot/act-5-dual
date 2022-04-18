@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration[
+<!ELEMENT log4j:configuration (appender,logger)>
+<!ELEMENT appender (param+, layout)>
+<!ATTLIST appender name CDATA #REQUIRED>
+<!ATTLIST appender class CDATA #REQUIRED>
+<!ELEMENT param EMPTY>
+<!ATTLIST param name CDATA #REQUIRED>
+<!ATTLIST param value CDATA #REQUIRED>
+<!ELEMENT layout (#PCDATA)>
+<!ATTLIST layout class CDATA #REQUIRED>
+<!ELEMENT logger (level, appender-ref)>
+<!ATTLIST logger name CDATA #REQUIRED>
+<!ATTLIST logger additivity CDATA #REQUIRED>
+<!ELEMENT level EMPTY>
+<!ELEMENT appender-ref EMPTY>
+<!ATTLIST level value CDATA #REQUIRED>
+<!ATTLIST appender-ref ref CDATA #REQUIRED>
+]>
+
+<log4j:configuration>
+	<appender name="DB" class="org.apache.log4j.jdbc.JDBCAppender">
+		<param name="URL"
+			value="jdbc:mysql://localhost/logsjava2" />
+		<param name="driver" value="com.mysql.jdbc.Driver" />
+		<param name="user" value="usuario" />
+		<param name="password" value="usuario" />
+		<param name="sql"
+			value="INSERT INTO LOGS VALUES('%x',now(),'%C','%p','%m')" />
+
+		<layout class="org.apache.log4j.PatternLayout">
+		</layout>
+	</appender>
+
+	<logger name="log4j.rootLogger" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="DB" />
+	</logger>
+
+</log4j:configuration>
