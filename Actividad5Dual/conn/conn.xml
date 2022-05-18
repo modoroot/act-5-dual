@@ -1,0 +1,5 @@
+<conn>
+	<url>jdbc:mysql://localhost:3306/javalogs</url>
+	<username>usuario</username>
+	<pwd>usuario</pwd>
+</conn>
